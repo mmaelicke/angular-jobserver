@@ -1,0 +1,8 @@
+<ng-container *ngIf="!job">
+  <div class="row">
+    <div class="col col-xs-12 text-center">
+      <fa name="spinner" animation="spin" size="5x"></fa>
+    </div>
+  </div>
+</ng-container>
+<app-job-form [job]="job" *ngIf="job"></app-job-form>

@@ -1,0 +1,30 @@
+<div class="btn-group" role="group">
+    <button class="btn btn-outline-{{ addScript ? 'danger' : 'success'}}" (click)="addScript = !addScript">{{ addScript ? 'Close' : 'Open'}} Script dialog</button>
+    <button class="btn btn-outline-{{ addDataFile ? 'danger' : 'success' }}" (click)="addDataFile = !addDataFile">{{ addDataFile ? 'Close' : 'Open'}} Datafile dialog</button>
+</div>
+<form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+  <p class="form-text">
+    You can place a new Job without any further arguments given. However, such a Job cannot be run, as it will need at
+    least a script to be processed set. Almost all scripts will further need a Data object to be set as well.
+  </p>
+
+  <div class="input-group mt-3" *ngIf="addScript">
+    <div class="input-group-prepend"><span class="input-group-text">Script (function) name</span></div>
+    <select name="script" id="scriptSelect" formControlName="script" class="form-control">
+      <option [value]="script.name" *ngFor="let script of allScripts">
+        {{ script.name }} ({{ script.parameters.length }} arguments)
+      </option>
+    </select>
+  </div>
+
+  <div class="input-group mt-3" *ngIf="addDataFile">
+    <div class="input-group-prepend"><span class="input-group-text">Data file identifier</span></div>
+    <select name="data" id="dataSelect" formControlName="data" class="form-control">
+      <option [value]="datafile.name" *ngFor="let datafile of allDataFiles">
+        {{ datafile.name }}  ({{ datafile.size }})
+      </option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-success mr-3">{{ editMode ? 'Save' : 'Create' }} Job</button>
+</form>

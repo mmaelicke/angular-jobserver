@@ -1,0 +1,11 @@
+<table class="table table-striped">
+  <tr>
+    <th>Job ID</th>
+    <th>started</th>
+    <th>finished</th>
+    <th>took</th>
+    <th>actions</th>
+    <th>execute job</th>
+  </tr>
+  <tr job-tr [job]="job" viewStyle="table" *ngFor="let job of jobs"></tr>
+</table>

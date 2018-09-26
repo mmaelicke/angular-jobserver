@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1>Welcome to {{ appTitle }}</h1>
+    <p>
+      {{ appTeaser }}
+    </p>
+  </div>
+  <app-message></app-message>
+  <div class="row">
+    <div class="col col-md-6">
+      <a [routerLink]="['web']">
+        <div class="card">
+          <div class="text-center card-img-top my-5">
+            <fa name="home" size="5x" class="border-secondary"></fa>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              {{ appTitle }} Home
+            </h5>
+            <p class="card-text">
+              Visit our homepage to meet our team and learn more about our services
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col col-md-6">
+      <div class="card">
+        <div class="text-center card-img-top my-5">
+          <fa name="cog" size="5x"></fa>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ appTitle }} Console
+          </h5>
+          <div class="card-text">
+            Jump to your personal console to manage your Jobs and kick-off new ones!
+            <ng-container *ngIf="formLoaded===''">
+              <hr>
+              <button type="button" class="btn btn-success" (click)="formLoaded='register'">Register now</button>
+              <button type="button" class="btn btn-primary ml-3" (click)="formLoaded='login'">Login</button>
+            </ng-container>
+
+            <div *ngIf="formLoaded==='login'">
+              <hr>
+              <app-login-form></app-login-form>
+            </div>
+
+            <div *ngIf="formLoaded==='register'">
+              <hr>
+              <app-registration-form></app-registration-form>
+            </div>
+            <hr>
+            <a (click)="formLoaded=''" *ngIf="formLoaded!=''" style="cursor: pointer">close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<nav class="navbar sticky-top navbar-expand-md navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/console"><fa name="terminal"></fa> Console</a>
+
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#mainnav" aria-controls="mainnav" aria-expanded="false">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="mainnav">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink="/console" class="nav-link"><fa name="clock-o"></fa> Jobs</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a [routerLink]="['datafiles']" class="nav-link"><fa name="file"></fa> Data Files</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a routerLink="scripts" class="nav-link"><fa name="code"></fa> Scripts</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>

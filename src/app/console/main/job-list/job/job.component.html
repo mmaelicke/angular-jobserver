@@ -1,0 +1,44 @@
+<ng-container *ngIf="pending">
+  <div class=" p-5 text-center">
+    <fa name="spinner" animation="spin" size="5x" style="color: dimgrey"></fa>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!pending && viewStyle === 'page'">
+  <a routerLink="/console"><fa name="chevron-left"></fa> list all Jobs</a>
+  <h1>Job-ID: {{ job._id }}</h1>
+  <div>
+    <div class="badge badge-info">created: <div class="badge badge-light">{{ job.created | date: 'd. LLLL y, HH:mm:ss' }}</div></div>
+    <div class="badge badge-success ml-3" *ngIf="!(job.started==='None')">
+      started: <div class="badge badge-light">{{ job.started | date: 'd. LLLL y, HH:mm:ss' }}</div>
+    </div>
+    <div class="badge badge-success ml-3" *ngIf="!(job.finished==='None')">
+      finished: <div class="badge badge-light">{{ job.finished | date: 'd. LLLL y, HH:mm:ss' }}</div>
+    </div>
+  </div>
+  <h2>Data</h2>
+  <pre>{{ job.data | json}}</pre>
+  <h2>Result</h2>
+  <pre>{{ job.result | json }}</pre>
+</ng-container>
+
+<ng-container *ngIf="!pending && viewStyle === 'table'">
+    <td>{{ job._id }}</td>
+    <td><fa name="{{ job.started === 'None' ? 'times' : 'check' }}" [style.color]="job.started === 'None' ? 'red' : 'green'"></fa></td>
+    <td><fa name="{{ job.finished === 'None' ? 'times' : 'check' }}" [style.color]="job.finished === 'None' ? 'red' : 'green'"></fa></td>
+    <td>{{ job.time_sec ? job.time_sec + ' sec' : 'NaN' }}</td>
+    <td>
+      <a [routerLink]="['job', job._id]" class="mr-2"><fa name="link" style="color: darkgoldenrod"></fa></a>
+      <a [routerLink]="['job', job._id, 'edit']" class="mr-2"><fa name="pencil" style="color: green"></fa></a>
+      <a  class="mr-2"><fa name="times" style="color: red"></fa></a>
+    </td>
+    <td><button type="button" class="btn btn-success" [disabled]="!(job.script && job.script_name)">run</button></td>
+</ng-container>
+
+<ng-container *ngIf="!pending && viewStyle === 'box'">
+  <div class="alert alert-info">
+  <pre>
+    {{ job | json }}
+  </pre>
+  </div>
+</ng-container>

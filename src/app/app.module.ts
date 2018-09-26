@@ -1,16 +1,69 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import {AppRoutingModule} from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { ConsoleComponent } from './console/console.component';
+import { WebpageComponent } from './webpage/webpage.component';
+import { HomeComponent } from './home/home.component';
+import { LoginFormComponent } from './home/login-form/login-form.component';
+import {HttpClientModule} from '@angular/common/http';
+import {SettingsService} from './console/shared/settings.service';
+import {AuthService} from './shared/auth.service';
+import { RegistrationFormComponent } from './home/registration-form/registration-form.component';
+import { MessageComponent } from './console/shared/message/message.component';
+import {MessageService} from './console/shared/message/message.service';
+import { JobComponent } from './console/main/job-list/job/job.component';
+import { JobListComponent } from './console/main/job-list/job-list.component';
+import { DatafilesComponent } from './console/main/datafiles/datafiles.component';
+import { DataFileComponent } from './console/main/datafiles/data-file/data-file.component';
+import {ApiService} from './console/shared/api.service';
+import { NavigationComponent } from './console/navigation/navigation.component';
+import { MainComponent } from './console/main/main.component';
+import { ScriptListComponent } from './console/main/script-list/script-list.component';
+import { ScriptElementComponent } from './console/main/script-list/script-element/script-element.component';
+import { JobFormComponent } from './console/main/job-form/job-form.component';
+import { DashboardComponent } from './console/main/dashboard/dashboard.component';
+import { JobEditPageComponent } from './console/main/job-edit-page/job-edit-page.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConsoleComponent,
+    WebpageComponent,
+    HomeComponent,
+    LoginFormComponent,
+    RegistrationFormComponent,
+    MessageComponent,
+    JobComponent,
+    JobListComponent,
+    DatafilesComponent,
+    DataFileComponent,
+    NavigationComponent,
+    MainComponent,
+    ScriptListComponent,
+    ScriptElementComponent,
+    JobFormComponent,
+    DashboardComponent,
+    JobEditPageComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AngularFontAwesomeModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    SettingsService,
+    AuthService,
+    MessageService,
+    ApiService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

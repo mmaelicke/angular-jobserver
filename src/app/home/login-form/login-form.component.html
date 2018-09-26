@@ -1,0 +1,26 @@
+<form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" class="form-control" required #name="ngModel" [(ngModel)]="email">
+    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+      E-Mail is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" class="form-control" required #pw="ngModel" [(ngModel)]="password">
+    <div [hidden]="pw.valid || pw.pristine" class="alert alert-danger">
+      Enter your password
+    </div>
+  </div>
+  <a href="#">Forgot Password?</a><br>
+
+  <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">
+    Login <fa name="spinner" animation="spin" *ngIf="pending"></fa>
+  </button>
+  <div [hidden]="message===''" class="alert alert-danger">
+    {{ message }}
+  </div>
+
+</form>
