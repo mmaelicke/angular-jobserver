@@ -1,6 +1,5 @@
 export class AppContent {
   appTitle = 'Jobserver';
-  appTeaser = 'This will be the landing page for customers, main website about the company and our backend. The whole\n' +
-    '      application is not yet \'made nice\', just uses the bootstrap framework to look a little modern and focuses on\n' +
-    '      functionality.';
+  appTeaser = 'Welcome to the Jobserver-Fontend Landing page. You can link your website in the home tempplate' +
+    ' for giving some general information about this jobserver instance.';
 }
