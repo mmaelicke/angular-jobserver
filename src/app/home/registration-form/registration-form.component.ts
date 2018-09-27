@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../shared/auth.service';
-import {ErrorResponse} from '../../shared/responses.interface';
+import {ErrorResponse} from '../../console/shared/responses.interface';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
 import {MessageService} from '../../console/shared/message/message.service';
@@ -41,6 +41,9 @@ export class RegistrationFormComponent implements OnInit {
     this.auth.registerUser(this.emails.get('email').value, this.passwords.get('password').value).subscribe(
       (response: {status: number, message: string}) => {
         this.messageService.success(response.message, 'Registration successfull');
+        // empty the form
+        this.registrationForm.reset();
+        this.pending = false;
         this.router.navigate(['/']);
       },
       (error: HttpErrorResponse) => {

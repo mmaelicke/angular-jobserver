@@ -1,0 +1,18 @@
+<div class="container">
+  <h1 class="page-header">Resend {{ mode }}</h1>
+
+  <app-message></app-message>
+  <hr>
+  <ng-container  *ngIf="mode==='password' || mode === 'activation'; else modeFail">
+    <p>Please enter the E-mail address of the registered account. You will receive a new {{ mode }} mail.</p>
+    <app-resend-form [mode]="mode"></app-resend-form>
+  </ng-container>
+  <br>
+  <a routerLink="/" class="btn btn-primary">Back to Home</a>
+</div>
+<ng-template #modeFail>
+  <div class="alert alert-danger">
+    <div class="alert-heading">Severe Error</div>
+    <p>Something went wrong. The resend mode is not present.</p>
+  </div>
+</ng-template>

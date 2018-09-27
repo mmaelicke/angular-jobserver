@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../shared/auth.service';
 import {User} from '../../console/shared/user.model';
-import {ErrorResponse} from '../../shared/responses.interface';
+import {ErrorResponse} from '../../console/shared/responses.interface';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Error} from 'tslint/lib/error';
 import {Router} from '@angular/router';
@@ -52,7 +52,8 @@ export class LoginFormComponent implements OnInit {
 
         // switch the error messages
         if (err.status === 409) {
-          this.message = 'You are not activated yet. Please check your mails.';
+          this.message = 'You are not activated yet. Please check your mails or ' +
+            '<a href="/resend/activation" class="alert-link">send a new activation link</a>.';
         } else {
           this.message = err.message;
         }

@@ -3,8 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SettingsService} from '../console/shared/settings.service';
 import {BehaviorSubject} from 'rxjs';
 import {User} from '../console/shared/user.model';
-import {ErrorResponse} from './responses.interface';
-import {TokenHeader} from './token-header.interface';
+import {TokenHeader} from '../console/shared/token-header.interface';
+import {MessageService} from '../console/shared/message/message.service';
 
 @Injectable()
 export class AuthService {
@@ -12,16 +12,24 @@ export class AuthService {
   user: BehaviorSubject<User>;
   accessToken: BehaviorSubject<string>;
   tokenHeader: BehaviorSubject<TokenHeader>;
+  url: string;
 
-  constructor(private http: HttpClient, private settings: SettingsService) {
+  constructor(private http: HttpClient, private settings: SettingsService, private message: MessageService) {
     // default status
     this.loggedIn = new BehaviorSubject<boolean>(false);
     this.user = new BehaviorSubject<User>((<User>{role: 'guest'}));
     this.accessToken = new BehaviorSubject<string>('');
     this.tokenHeader = new BehaviorSubject<TokenHeader>(this.getHeaderOptions());
+
+    // subscribe to the REST API url
+    this.settings.RESTnigmHost.subscribe(
+      (newUrl: string) => {
+        this.url = newUrl;
+      }
+    );
   }
 
-  getHeaderOptions(withCredentials= true, contentType= 'application/json'):TokenHeader {
+  getHeaderOptions(withCredentials= true, contentType= 'application/json'): TokenHeader {
     const options = {
     'Content-Type': contentType
     };
@@ -52,15 +60,21 @@ export class AuthService {
   }
 
   registerUser(email: string, password: string) {
-//    const httpOptions = {
-//      headers: new HttpHeaders({
-//        'Content-Type': 'application/json'
-//      })
-//    };
+    // get Header without Credentials
     const httpOptions = this.getHeaderOptions(false);
-    return this.http.put(this.settings.RESTnigmHost.getValue() + '/user', {
+    return this.http.put(this.url + '/user', {
       email: email,
       password: password
     }, httpOptions);
+  }
+
+  resendActivationLink(email: string) {
+    // get Headers without Credentials
+    const httpOptions = this.getHeaderOptions(false);
+    return this.http.get(this.url + '/user/' + email + '/resend?activation', httpOptions);
+  }
+
+  resendPassword() {
+    return this.message.info('Forgetting your password is really your problem. Joke aside: Not Implemented.', 'Sorry');
   }
 }

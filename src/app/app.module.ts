@@ -27,6 +27,8 @@ import { ScriptElementComponent } from './console/main/script-list/script-elemen
 import { JobFormComponent } from './console/main/job-form/job-form.component';
 import { DashboardComponent } from './console/main/dashboard/dashboard.component';
 import { JobEditPageComponent } from './console/main/job-edit-page/job-edit-page.component';
+import { ResendFormComponent } from './home/resend/resend-form/resend-form.component';
+import { ResendComponent } from './home/resend/resend.component';
 
 
 @NgModule({
@@ -49,6 +51,8 @@ import { JobEditPageComponent } from './console/main/job-edit-page/job-edit-page
     JobFormComponent,
     DashboardComponent,
     JobEditPageComponent,
+    ResendFormComponent,
+    ResendComponent,
   ],
   imports: [
     BrowserModule,

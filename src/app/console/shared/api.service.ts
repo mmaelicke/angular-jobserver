@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {AuthService} from '../../shared/auth.service';
 import {SettingsService} from './settings.service';
 import {Subscription} from 'rxjs';
-import {TokenHeader} from '../../shared/token-header.interface';
+import {TokenHeader} from './token-header.interface';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable()

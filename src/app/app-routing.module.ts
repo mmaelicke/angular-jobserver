@@ -11,9 +11,11 @@ import {ScriptListComponent} from './console/main/script-list/script-list.compon
 import {JobFormComponent} from './console/main/job-form/job-form.component';
 import {DashboardComponent} from './console/main/dashboard/dashboard.component';
 import {JobEditPageComponent} from './console/main/job-edit-page/job-edit-page.component';
+import {ResendComponent} from './home/resend/resend.component';
 
 const appRoutes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
+  {path: 'resend/:mode', component: ResendComponent},
   {path: 'web', component: WebpageComponent},
   {path: 'console', component: ConsoleComponent, children: [
       {path: '', component: DashboardComponent, pathMatch: 'full'},
