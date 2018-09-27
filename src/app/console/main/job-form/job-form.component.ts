@@ -34,11 +34,12 @@ export class JobFormComponent implements OnInit {
   });
 
   constructor(private api: ApiService, private message: MessageService, private router: Router) {
-    // check whether edit Mode is active
-    this.editMode = !!this.job;
   }
 
   ngOnInit() {
+    // check whether edit Mode is active
+    this.editMode = !!this.job;
+
     this.api.getScripts().subscribe(
       (response: {found: number, scripts: ScriptElement[]}) => {
         this.allScripts = response.scripts;
@@ -78,7 +79,7 @@ export class JobFormComponent implements OnInit {
     this.api.createJob(data).subscribe(
       (job: Job) => {
         this.message.success('Created new Job of ID: ' + job._id, 'Job created');
-        this.router.navigate(['']);
+        this.router.navigate(['console', 'job', job._id]);
       },
       (error: ErrorResponse) => {
         this.message.error('The Job creation failed.<br>' + error.message, 'Job creation failed.');
@@ -91,7 +92,7 @@ export class JobFormComponent implements OnInit {
     this.api.editJob(this.job._id, data).subscribe(
       (job: Job) => {
         this.message.success('Edited Job ID: ' + this.job._id, 'Edit successfull');
-        this.router.navigate(['job', this.job._id]);
+        this.router.navigate(['console', 'job', this.job._id]);
       }
     );
   }

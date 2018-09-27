@@ -53,6 +53,10 @@ export class ApiService implements OnDestroy {
     return this.http.delete(this.url + '/job/' + id, this.authHeader);
   }
 
+  runJob(id: string) {
+    return this.http.get(this.url + '/job/' + id + '/run', this.authHeader)
+  }
+
   /* -------------------------------------------------------------------------------------
   * Datafile Endpoint API
   * -------------------------------------------------------------------------------------*/

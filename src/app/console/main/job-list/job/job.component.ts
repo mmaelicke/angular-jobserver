@@ -1,10 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Job} from './job.interface';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MessageService} from '../../../shared/message/message.service';
 import {ApiService} from '../../../shared/api.service';
-import {AuthService} from '../../../../shared/auth.service';
-import {User} from '../../../shared/user.model';
+import {ErrorResponse, MessageResponse} from '../../../shared/responses.interface';
 
 @Component({
   selector: 'app-job, [job-tr]',
@@ -15,10 +14,13 @@ export class JobComponent implements OnInit {
   @Input() job: Job;
   @Input() viewStyle = 'table';
   pending = false;
+  // TODO: this is not a good name as jobRunning is true when the job run request is pending, not when the job is actually running
+  // TODO: implement an automatic refresh function if job.started is not None but job.finished is None
+  jobRunning = false;
   activeUserRole: string;
 
   constructor(private route: ActivatedRoute, private api: ApiService,
-              private message: MessageService, private auth: AuthService) { }
+              private message: MessageService, private router: Router) { }
 
   ngOnInit() {
 //    console.log(this.job);
@@ -55,6 +57,52 @@ export class JobComponent implements OnInit {
         }
       );
     }
+  }
+
+  onDeleteJob() {
+    // set pending state
+    this.pending = true;
+    this.api.deleteJob(this.job._id).subscribe(
+      (response: MessageResponse) => {
+        this.pending = false;
+        this.message.success(response.message, 'Job deleted.');
+        this.router.navigate(['/console']);
+      },
+      (error: ErrorResponse) => {
+        this.pending = false;
+        this.message.error(error.message, 'Job deletion failed.');
+      }
+    );
+  }
+
+  onJobRun() {
+    // indicate the job is running, until it needs to be reloaded
+    this.jobRunning = true;
+    this.api.runJob(this.job._id).subscribe(
+      (job: Job) => {
+        this.jobRunning = false;
+        this.job = job;
+      },
+      (error: ErrorResponse) => {
+        this.jobRunning = false;
+        this.message.error(error.message, 'Job execution errored!');
+      }
+    );
+    setTimeout(() => {this.jobRunning = false; }, 5000);
+  }
+
+  refresh() {
+    this.pending = true;
+    this.api.getJob(this.job._id).subscribe(
+      (job: Job) => {
+        this.pending = false;
+        this.job = job;
+      },
+      (error: ErrorResponse) => {
+        this.pending = false;
+        this.message.error(error.message, 'Refresh failed');
+      }
+    );
   }
 
 }

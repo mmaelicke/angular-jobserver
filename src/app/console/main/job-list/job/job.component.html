@@ -1,7 +1,13 @@
-<ng-container *ngIf="pending">
+<ng-container *ngIf="pending && !(viewStyle === 'table')">
   <div class=" p-5 text-center">
     <fa name="spinner" animation="spin" size="5x" style="color: dimgrey"></fa>
   </div>
+</ng-container>
+
+<ng-container *ngIf="pending && viewStyle === 'table'">
+  <td class="text-center" colspan="6">
+    <fa name="spinner" animation="spin" size="2x" style="color: dimgrey"></fa>
+  </td>
 </ng-container>
 
 <ng-container *ngIf="!pending && viewStyle === 'page'">
@@ -18,8 +24,12 @@
   </div>
   <h2>Data</h2>
   <pre>{{ job.data | json}}</pre>
+  <h2>Script</h2>
+  <pre>{{ job.script | json }}</pre>
   <h2>Result</h2>
   <pre>{{ job.result | json }}</pre>
+  <h2>Details</h2>
+  <pre>{{ job | json}}</pre>
 </ng-container>
 
 <ng-container *ngIf="!pending && viewStyle === 'table'">
@@ -30,9 +40,22 @@
     <td>
       <a [routerLink]="['job', job._id]" class="mr-2"><fa name="link" style="color: darkgoldenrod"></fa></a>
       <a [routerLink]="['job', job._id, 'edit']" class="mr-2"><fa name="pencil" style="color: green"></fa></a>
-      <a  class="mr-2"><fa name="times" style="color: red"></fa></a>
+      <a  class="mr-2" (click)="onDeleteJob()"><fa name="times" style="color: red; cursor: pointer"></fa></a>
     </td>
-    <td><button type="button" class="btn btn-success" [disabled]="!(job.script && job.script_name)">run</button></td>
+    <td>
+      <button type="button" class="btn btn-outline-primary" *ngIf="!(job.result === 'None')" [disabled]="true">
+        view result
+      </button>
+      <button type="button" class="btn btn-outline-success" *ngIf="job.result === 'None' && !jobRunning && job.started === 'None'"
+              [disabled]="!(job.script_name || job.script)" (click)="onJobRun()">
+        run
+      </button>
+      <fa name="spinner" animation="spin" size="2x" style="color: darkgreen" *ngIf="job.result === 'None' && jobRunning"></fa>
+      <button type="button" class="btn btn-outline-secondary" (click)="refresh()"
+              *ngIf="job.result === 'None' && !(job.started === 'None') && job.finished === 'None'">
+        <fa name="refresh"></fa>
+      </button>
+    </td>
 </ng-container>
 
 <ng-container *ngIf="!pending && viewStyle === 'box'">
