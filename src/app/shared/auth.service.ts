@@ -8,6 +8,8 @@ import {MessageService} from '../console/shared/message/message.service';
 
 @Injectable()
 export class AuthService {
+  _user: User;
+  _token: string;
   loggedIn: BehaviorSubject<boolean>;
   user: BehaviorSubject<User>;
   accessToken: BehaviorSubject<string>;
@@ -27,6 +29,22 @@ export class AuthService {
         this.url = newUrl;
       }
     );
+
+    // subscribe to user and accessToken subjects
+    this.user.subscribe(
+      (newUser: User) => {
+        this._user = newUser;
+      }
+    );
+    this.accessToken.subscribe(
+      (token: string) => {
+        this._token = token;
+        console.log('Token: ' + this._token);
+
+        // emit a new Header
+        this.tokenHeader.next(this.getHeaderOptions());
+      }
+    );
   }
 
   getHeaderOptions(withCredentials= true, contentType= 'application/json'): TokenHeader {
@@ -34,7 +52,7 @@ export class AuthService {
     'Content-Type': contentType
     };
     if (withCredentials) {
-      options['Authorization'] = 'Bearer ' + this.accessToken.getValue();
+      options['Authorization'] = 'Bearer ' + this._token;
     }
 
     const httpOptions = {
@@ -57,6 +75,13 @@ export class AuthService {
       })
     };
     return this.http.get(this.settings.RESTnigmHost.getValue() + '/login', httpOptions);
+  }
+
+  logout() {
+    // update the status
+    this.loggedIn.next(false);
+    this.user.next(null);
+    this.accessToken.next('');
   }
 
   registerUser(email: string, password: string) {

@@ -54,7 +54,7 @@ export class ApiService implements OnDestroy {
   }
 
   runJob(id: string) {
-    return this.http.get(this.url + '/job/' + id + '/run', this.authHeader)
+    return this.http.get(this.url + '/job/' + id + '/run', this.authHeader);
   }
 
   /* -------------------------------------------------------------------------------------

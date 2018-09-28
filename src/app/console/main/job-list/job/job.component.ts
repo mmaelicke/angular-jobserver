@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Job} from './job.interface';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MessageService} from '../../../shared/message/message.service';
@@ -13,6 +13,9 @@ import {ErrorResponse, MessageResponse} from '../../../shared/responses.interfac
 export class JobComponent implements OnInit {
   @Input() job: Job;
   @Input() viewStyle = 'table';
+  // need  this deleted event, so that a parent component or list-component can refresh or navigate away
+  @Output() deleted = new EventEmitter<boolean>();
+
   pending = false;
   // TODO: this is not a good name as jobRunning is true when the job run request is pending, not when the job is actually running
   // TODO: implement an automatic refresh function if job.started is not None but job.finished is None
@@ -66,7 +69,7 @@ export class JobComponent implements OnInit {
       (response: MessageResponse) => {
         this.pending = false;
         this.message.success(response.message, 'Job deleted.');
-        this.router.navigate(['/console']);
+        this.deleted.emit(true);
       },
       (error: ErrorResponse) => {
         this.pending = false;

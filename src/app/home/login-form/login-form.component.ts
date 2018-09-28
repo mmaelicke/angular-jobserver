@@ -35,7 +35,6 @@ export class LoginFormComponent implements OnInit {
         this.auth.accessToken.next(response.access_token);
         this.auth.user.next(response.user);
 
-        console.log(this.auth.user.getValue());
         this.messageService.success('Welcome back!', 'Login successful');
 
         this.router.navigate(['console']);

@@ -7,5 +7,10 @@
     <th>actions</th>
     <th>execute job</th>
   </tr>
-  <tr job-tr [job]="job" viewStyle="table" *ngFor="let job of jobs"></tr>
+  <tr job-tr [job]="job" viewStyle="table" *ngFor="let job of jobs" (deleted)="refreshJobs()"></tr>
+  <tr *ngIf="jobs.length === 0"><td colspan="6" class="text-center">
+    <div class="alert alert-secondary">
+      No Jobs found for your User. Maybe <a [routerLink]="['job', 'new']" class="alert-link">create a new Job?</a>
+    </div>
+  </td></tr>
 </table>
