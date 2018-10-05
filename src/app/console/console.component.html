@@ -2,13 +2,12 @@
 <div class="container">
   <app-message></app-message>
 
-  <h1>Console application</h1>
   <h2>User information</h2>
   <pre>
     {{ user | json }}
     {{ token | json }}
   </pre>
 
-  <h2>Page area</h2>
+  <hr>
   <router-outlet></router-outlet>
 </div>

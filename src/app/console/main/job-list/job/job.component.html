@@ -43,9 +43,9 @@
       <a  class="mr-2" (click)="onDeleteJob()"><fa name="times" style="color: red; cursor: pointer"></fa></a>
     </td>
     <td>
-      <button type="button" class="btn btn-outline-primary" *ngIf="!(job.result === 'None')" [disabled]="true">
+      <a [routerLink]="['job', job._id, 'result']" class="btn btn-outline-primary" *ngIf="!(job.result === 'None')">
         view result
-      </button>
+      </a>
       <button type="button" class="btn btn-outline-success" *ngIf="job.result === 'None' && !jobRunning && job.started === 'None'"
               [disabled]="!(job.script_name || job.script)" (click)="onJobRun()">
         run

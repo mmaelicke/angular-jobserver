@@ -12,6 +12,7 @@ import {JobFormComponent} from './console/main/job-form/job-form.component';
 import {DashboardComponent} from './console/main/dashboard/dashboard.component';
 import {JobEditPageComponent} from './console/main/job-edit-page/job-edit-page.component';
 import {ResendComponent} from './home/resend/resend.component';
+import {ViewResultComponent} from './console/main/view-result/view-result.component';
 
 const appRoutes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
@@ -22,6 +23,7 @@ const appRoutes = [
       {path: 'job/new', component: JobFormComponent},
       {path: 'job/:id', component: JobComponent, pathMatch: 'full'},
       {path: 'job/:id/edit', component: JobEditPageComponent},
+      {path: 'job/:id/result', component: ViewResultComponent},
       {path: 'datafiles', component: DatafilesComponent},
       {path: 'scripts', component: ScriptListComponent}
     ]}

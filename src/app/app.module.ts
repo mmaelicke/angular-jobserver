@@ -29,6 +29,8 @@ import { DashboardComponent } from './console/main/dashboard/dashboard.component
 import { JobEditPageComponent } from './console/main/job-edit-page/job-edit-page.component';
 import { ResendFormComponent } from './home/resend/resend-form/resend-form.component';
 import { ResendComponent } from './home/resend/resend.component';
+import { ViewResultComponent } from './console/main/view-result/view-result.component';
+import {NgxJsonViewerModule} from 'ngx-json-viewer';
 
 
 @NgModule({
@@ -53,6 +55,7 @@ import { ResendComponent } from './home/resend/resend.component';
     JobEditPageComponent,
     ResendFormComponent,
     ResendComponent,
+    ViewResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { ResendComponent } from './home/resend/resend.component';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    NgxJsonViewerModule,
   ],
   providers: [
     SettingsService,

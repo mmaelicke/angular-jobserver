@@ -1,0 +1,13 @@
+<ng-container *ngIf="result; else noResult">
+  <div class="card p-2 bg-light">
+    <ngx-json-viewer [json]="result"></ngx-json-viewer>
+  </div>
+</ng-container>
+
+<ng-template #noResult>
+  <div class="alert alert-danger">
+    <h3 class="alert-heading">No Job</h3>
+    <p *ngIf="error"><strong>[{{ error.status }}]</strong>: {{ error.message }}</p>
+    <p *ngIf="!error">[DEVELOPER]: The Job could not be parsed from the route.</p>
+  </div>
+</ng-template>

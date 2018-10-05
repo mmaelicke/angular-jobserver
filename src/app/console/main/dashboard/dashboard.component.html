@@ -1,1 +1,6 @@
-<app-job-list></app-job-list>
+Filter:&nbsp;&nbsp;
+<button (click)="listFilter='all'">all</button>
+<button (click)="listFilter='finished'">finished</button>
+<button (click)="listFilter='pending'">pending</button>
+<button (click)="listFilter='notStarted'">not executed</button>
+<app-job-list [filter]="listFilter"></app-job-list>

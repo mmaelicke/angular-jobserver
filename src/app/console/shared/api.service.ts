@@ -33,6 +33,40 @@ export class ApiService implements OnDestroy {
     return this.http.get(this.url + '/jobs', this.authHeader);
   }
 
+  getFinishedJobs() {
+    const filter = {
+      finished: {$ne: null}
+    };
+
+    return this.http.post(this.url + '/jobs', filter, this.authHeader);
+  }
+
+  getPendingJobs() {
+    const filter = {
+      $and: [
+        {started: {$ne: null}},
+        {$or: [
+            {finished: null},
+            {finished: {$exists: false}}
+          ]}
+      ]
+    };
+
+    return this.http.post(this.url + '/jobs', filter, this.authHeader);
+  }
+
+  getNotStartedJobs() {
+    const filter = {
+      $or: [
+        {started: null},
+        {started: {$exists: false}}
+      ]
+    };
+
+    return this.http.post(this.url + '/jobs', filter, this.authHeader);
+  }
+
+
   getJob(id: string) {
     return this.http.get(this.url + '/job/' + id, this.authHeader);
   }
