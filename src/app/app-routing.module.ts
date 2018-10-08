@@ -5,7 +5,7 @@ import {WebpageComponent} from './webpage/webpage.component';
 import {ConsoleComponent} from './console/console.component';
 import {JobListComponent} from './console/main/job-list/job-list.component';
 import {JobComponent} from './console/main/job-list/job/job.component';
-import {DatafilesComponent} from './console/main/datafiles/datafiles.component';
+import {DatafilesComponent} from './console/main/data/datafiles/datafiles.component';
 import {MainComponent} from './console/main/main.component';
 import {ScriptListComponent} from './console/main/script-list/script-list.component';
 import {JobFormComponent} from './console/main/job-form/job-form.component';
@@ -13,6 +13,7 @@ import {DashboardComponent} from './console/main/dashboard/dashboard.component';
 import {JobEditPageComponent} from './console/main/job-edit-page/job-edit-page.component';
 import {ResendComponent} from './home/resend/resend.component';
 import {ViewResultComponent} from './console/main/view-result/view-result.component';
+import {MongodbComponent} from './console/main/data/mongodb/mongodb.component';
 
 const appRoutes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
@@ -25,6 +26,7 @@ const appRoutes = [
       {path: 'job/:id/edit', component: JobEditPageComponent},
       {path: 'job/:id/result', component: ViewResultComponent},
       {path: 'datafiles', component: DatafilesComponent},
+      {path: 'mongodb', component: MongodbComponent},
       {path: 'scripts', component: ScriptListComponent}
     ]}
 ];

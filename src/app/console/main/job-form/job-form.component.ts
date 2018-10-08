@@ -3,7 +3,7 @@ import {Job} from '../job-list/job/job.interface';
 import {ApiService} from '../../shared/api.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ScriptElement} from '../script-list/script-element/script-element.interface';
-import {DataFile} from '../datafiles/data-file/data-file.interface';
+import {DataFile} from '../data/datafiles/data-file/data-file.interface';
 import {ErrorResponse} from '../../shared/responses.interface';
 import {MessageService} from '../../shared/message/message.service';
 import {Router} from '@angular/router';

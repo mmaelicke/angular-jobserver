@@ -11,8 +11,14 @@
       <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <a routerLink="/console" class="nav-link"><fa name="clock-o"></fa> Jobs</a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a [routerLink]="['datafiles']" class="nav-link"><fa name="file"></fa> Data Files</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" role="button" (click)="dataMenuCollapsed = !dataMenuCollapsed">
+          <fa name="database"></fa> Data
+        </a>
+        <div class="dropdown-menu {{dataMenuCollapsed ? '' : 'show'}}">
+          <a [routerLink]="['datafiles']" class="dropdown-item"><fa name="file"></fa> Data Files</a>
+          <a [routerLink]="['mongodb']" class="dropdown-item"><fa name="database"></fa> Database</a>
+        </div>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a routerLink="scripts" class="nav-link"><fa name="code"></fa> Scripts</a>

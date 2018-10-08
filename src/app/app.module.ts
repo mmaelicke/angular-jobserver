@@ -17,8 +17,8 @@ import { MessageComponent } from './console/shared/message/message.component';
 import {MessageService} from './console/shared/message/message.service';
 import { JobComponent } from './console/main/job-list/job/job.component';
 import { JobListComponent } from './console/main/job-list/job-list.component';
-import { DatafilesComponent } from './console/main/datafiles/datafiles.component';
-import { DataFileComponent } from './console/main/datafiles/data-file/data-file.component';
+import { DatafilesComponent } from './console/main/data/datafiles/datafiles.component';
+import { DataFileComponent } from './console/main/data/datafiles/data-file/data-file.component';
 import {ApiService} from './console/shared/api.service';
 import { NavigationComponent } from './console/navigation/navigation.component';
 import { MainComponent } from './console/main/main.component';
@@ -31,6 +31,8 @@ import { ResendFormComponent } from './home/resend/resend-form/resend-form.compo
 import { ResendComponent } from './home/resend/resend.component';
 import { ViewResultComponent } from './console/main/view-result/view-result.component';
 import {NgxJsonViewerModule} from 'ngx-json-viewer';
+import { DataComponent } from './console/main/data/data.component';
+import { MongodbComponent } from './console/main/data/mongodb/mongodb.component';
 
 
 @NgModule({
@@ -56,6 +58,8 @@ import {NgxJsonViewerModule} from 'ngx-json-viewer';
     ResendFormComponent,
     ResendComponent,
     ViewResultComponent,
+    DataComponent,
+    MongodbComponent,
   ],
   imports: [
     BrowserModule,

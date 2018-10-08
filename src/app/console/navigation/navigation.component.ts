@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+  dataMenuCollapsed = true;
 
   constructor(private auth: AuthService, private message: MessageService, private router: Router) { }
 
