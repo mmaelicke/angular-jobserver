@@ -7,6 +7,7 @@ import {DataFile} from '../data/datafiles/data-file/data-file.interface';
 import {ErrorResponse} from '../../shared/responses.interface';
 import {MessageService} from '../../shared/message/message.service';
 import {Router} from '@angular/router';
+import {DataObject} from '../data/mongodb/data-object/data-object.interface';
 
 @Component({
   selector: 'app-job-form',
@@ -17,13 +18,10 @@ export class JobFormComponent implements OnInit {
   @Input() job: Job;
   editMode: boolean;
 
-  // build the Form contollers
-  addDataFile = false;
-  addScript = false;
-
-  // scripts and dataFiles
+  // scripts and data-object, dataFiles
   allScripts: ScriptElement[] = [];
   allDataFiles: DataFile[] = [];
+  allData: DataObject[] = [];
 
   // build the Form modules
   datafileControl = new FormControl(this.editMode ? this.job.data.name : '');
@@ -62,7 +60,7 @@ export class JobFormComponent implements OnInit {
   }
 
   private buildData() {
-    // generate a request data JSON object
+    // generate a request data-object JSON object
     const data = {};
     if (this.scriptControl.value) {
       data['script_name'] = this.scriptControl.value;

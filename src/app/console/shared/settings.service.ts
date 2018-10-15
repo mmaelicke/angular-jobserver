@@ -6,6 +6,7 @@ export class SettingsService {
 
   constructor() {
     // DEV
+    //this.RESTnigmHost = new BehaviorSubject<string>('https://api.openhydro.de');
     this.RESTnigmHost = new BehaviorSubject<string>('http://localhost:5000');
     //this.RESTnigmHost = new BehaviorSubject<string>('http://rest-nigma-test.us-east-1.elasticbeanstalk.com');
     //this.RESTnigmHost = new BehaviorSubject<string>('https://enigmams-217007.appspot.com');
